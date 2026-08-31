@@ -16,10 +16,13 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Sreejith S | Full Stack Developer & Mobile App Engineer",
-  description: "Personal Developer Portfolio of Sreejith S - Specializing in React, Next.js, Node.js, PostgreSQL, MongoDB, and React Native.",
-  keywords: ["Sreejith S", "Full Stack Developer", "Next.js 15", "React Native", "Portfolio", "Node.js", "Dubai Developer"],
+  title: "Sreejith S | Software Engineer",
+  description: "Personal Developer Portfolio of Sreejith S - Software Engineer specializing in React, Next.js, Node.js, PostgreSQL, MongoDB, and React Native.",
+  keywords: ["Sreejith S", "Software Engineer", "Full Stack Developer", "Next.js 15", "React Native", "Portfolio", "Node.js"],
   authors: [{ name: "Sreejith S" }],
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export const viewport: Viewport = {

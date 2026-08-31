@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Check, ExternalLink, Github, X } from "lucide-react";
+import { ArrowUpRight, Check, Grid, X } from "lucide-react";
 import { PORTFOLIO_DATA, Project } from "@/data/portfolio-data";
 import EcommerceMockup from "@/components/ui/mockups/ecommerce-mockup";
 import DicomMockup from "@/components/ui/mockups/dicom-mockup";
@@ -14,6 +14,7 @@ import CrmMockup from "@/components/ui/mockups/crm-mockup";
 export default function ProjectsSection() {
   const projects = PORTFOLIO_DATA.projects;
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [showAllModal, setShowAllModal] = useState(false);
 
   const renderMockupFallback = (type: string) => {
     switch (type) {
@@ -53,19 +54,17 @@ export default function ProjectsSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <a
-              href="https://github.com/devsreejith"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 bg-[#181820] hover:bg-[#22222c] border border-white/10 text-xs font-medium text-gray-300 hover:text-white px-4 py-1.5 rounded-full transition-all duration-200"
+            <button
+              onClick={() => setShowAllModal(true)}
+              className="inline-flex items-center gap-1.5 bg-[#181820] hover:bg-[#22222c] border border-white/10 text-xs font-medium text-gray-300 hover:text-white px-4 py-1.5 rounded-full transition-all duration-200 shadow-md"
             >
-              <span>See all</span>
+              <span>See all ({projects.length})</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
+            </button>
           </motion.div>
         </div>
 
-        {/* 2-Column Grid */}
+        {/* 2-Column Main Featured Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.slice(0, 4).map((project, idx) => (
             <motion.div
@@ -97,10 +96,10 @@ export default function ProjectsSection() {
 
                 {/* Integrated Floating Bottom Glass Overlay Bar */}
                 <div className="absolute bottom-3 left-3 right-3 bg-[#181820]/85 backdrop-blur-xl border border-white/10 rounded-2xl px-5 py-3.5 flex items-center justify-between shadow-2xl group-hover:border-white/20 transition-colors">
-                  <div className="font-display font-semibold text-sm text-white tracking-wide group-hover:text-[#00E599] transition-colors">
+                  <div className="font-display font-semibold text-sm text-white tracking-wide group-hover:text-[#00E599] transition-colors truncate max-w-[70%]">
                     {project.title}
                   </div>
-                  <div className="text-[10px] font-mono uppercase text-gray-400 font-medium tracking-wider">
+                  <div className="text-[10px] font-mono uppercase text-gray-400 font-medium tracking-wider shrink-0">
                     {project.category}
                   </div>
                 </div>
@@ -110,7 +109,88 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* Interactive Project Detail Modal Popup */}
+      {/* See All Projects Drawer / Grid Modal */}
+      <AnimatePresence>
+        {showAllModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowAllModal(false)}
+              className="fixed inset-0 bg-black/85 backdrop-blur-md"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.3 }}
+              className="relative z-10 bg-[#111116] border border-white/15 rounded-3xl max-w-5xl w-full p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto my-6 custom-scrollbar"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowAllModal(false)}
+                className="absolute top-5 right-5 p-2 rounded-full bg-white/10 text-gray-300 hover:text-white hover:bg-white/20 transition-colors z-20"
+                aria-label="Close all projects view"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#00E599]">
+                  <Grid className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-display font-semibold text-white tracking-tight">
+                    All Projects ({projects.length})
+                  </h3>
+                  <p className="text-xs text-gray-400">Click any project to view full architecture details</p>
+                </div>
+              </div>
+
+              {/* All Projects Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                {projects.map((project) => (
+                  <div
+                    key={project.id}
+                    onClick={() => {
+                      setShowAllModal(false);
+                      setSelectedProject(project);
+                    }}
+                    className="bg-[#181820] border border-white/10 rounded-[20px] overflow-hidden p-3 group relative shadow-xl hover:border-[#00E599]/50 transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="h-[220px] rounded-xl overflow-hidden relative bg-[#08080c] flex items-center justify-center">
+                      {project.image ? (
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="w-full h-full p-2">
+                          {renderMockupFallback(project.imageType)}
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90" />
+                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                        <div className="font-display font-semibold text-xs text-white group-hover:text-[#00E599] transition-colors truncate max-w-[70%]">
+                          {project.title}
+                        </div>
+                        <span className="text-[10px] font-mono text-gray-400 uppercase bg-black/60 px-2 py-0.5 rounded border border-white/10">
+                          {project.category}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Interactive Single Project Detail Modal Popup */}
       <AnimatePresence>
         {selectedProject && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
@@ -219,25 +299,16 @@ export default function ProjectsSection() {
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex items-center gap-3 pt-4 border-t border-white/10">
+              {/* Action Button: Live Demo Only */}
+              <div className="pt-4 border-t border-white/10">
                 <a
                   href={selectedProject.liveUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 bg-white text-black font-semibold text-xs sm:text-sm py-3 rounded-full hover:bg-gray-100 transition-colors shadow-md"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-white text-black font-semibold text-xs sm:text-sm py-3.5 rounded-full hover:bg-gray-100 transition-colors shadow-md"
                 >
                   <span>Live Demo</span>
                   <ArrowUpRight className="w-4 h-4" />
-                </a>
-                <a
-                  href={selectedProject.githubUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#181820] border border-white/15 text-white font-medium text-xs sm:text-sm px-5 py-3 rounded-full hover:bg-white/10 transition-colors"
-                >
-                  <Github className="w-4 h-4" />
-                  <span>GitHub</span>
                 </a>
               </div>
             </motion.div>

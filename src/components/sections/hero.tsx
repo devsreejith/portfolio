@@ -31,25 +31,27 @@ export default function HeroSection() {
       {/* Main Content Container - Vertically & Horizontally Centered */}
       <div className="max-w-6xl mx-auto relative z-10 w-full">
         {/* Mobile Status Pill */}
-        <motion.div
-          initial={{ y: -10, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="xl:hidden inline-flex items-center gap-2 bg-[#121217] border border-white/10 rounded-full px-4 py-1.5 mb-6"
-        >
-          <span className="h-2 w-2 rounded-full bg-[#00E599]" />
-          <span className="text-xs text-gray-300">Available for projects</span>
-          <ArrowUpRight className="w-3 h-3 text-gray-400" />
-        </motion.div>
+        <div className="text-center lg:text-left">
+          <motion.div
+            initial={{ y: -10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="xl:hidden inline-flex items-center gap-2 bg-[#121217] border border-white/10 rounded-full px-4 py-1.5 mb-6"
+          >
+            <span className="h-2 w-2 rounded-full bg-[#00E599]" />
+            <span className="text-xs text-gray-300">Available for projects</span>
+            <ArrowUpRight className="w-3 h-3 text-gray-400" />
+          </motion.div>
+        </div>
 
         {/* 2-Column Grid (Centered Vertical Alignment) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          {/* Left Column: Left-Aligned Content */}
+          {/* Left Column: Center Aligned on Mobile, Left Aligned on Desktop */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-7 space-y-6 text-left"
+            className="lg:col-span-7 space-y-6 text-center lg:text-left"
           >
             {/* Greeting, Title & Subtitle */}
             <div className="space-y-2">
@@ -65,12 +67,12 @@ export default function HeroSection() {
             </div>
 
             {/* Description Paragraph */}
-            <p className="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed font-normal max-w-xl">
+            <p className="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed font-normal max-w-xl mx-auto lg:mx-0">
               Building fast, scalable web applications, mobile apps, and e-commerce platforms with clean code, modern technologies, and exceptional user experiences.
             </p>
 
             {/* Action Buttons Row */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2">
               <Link
                 href="#projects"
                 className="group relative inline-flex items-center gap-2 bg-white text-black font-semibold text-xs sm:text-sm px-6 py-3 rounded-full hover:bg-gray-100 transition-all duration-200 shadow-xl hover:scale-105"

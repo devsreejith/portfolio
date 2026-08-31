@@ -61,7 +61,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right: Download Resume Button */}
+        {/* Right Desktop: Download Resume Button */}
         <div className="hidden md:flex items-center">
           <a
             href="/Sreejith_S.pdf"
@@ -73,14 +73,25 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white"
-          aria-label="Toggle Navigation"
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        {/* Mobile Right: Resume Button Left of Hamburger Menu Button */}
+        <div className="flex md:hidden items-center gap-2">
+          <a
+            href="/Sreejith_S.pdf"
+            download="Sreejith_S_Resume.pdf"
+            className="inline-flex items-center gap-1.5 bg-white text-black font-semibold text-xs px-3.5 py-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
+          >
+            <span>Resume</span>
+            <Download className="w-3.5 h-3.5" />
+          </a>
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white"
+            aria-label="Toggle Navigation"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </motion.nav>
 
       {/* Mobile Menu Drawer */}
