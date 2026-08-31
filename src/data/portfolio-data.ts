@@ -12,7 +12,7 @@ export interface Project {
   projectFocus?: string;
   keyFeatures?: ProjectFeature[];
   tags: string[];
-  liveUrl: string;
+  liveUrl?: string;
   githubUrl?: string;
   image?: string;
   imageType: 'ecommerce' | 'dicom' | 'mobile' | 'dashboard' | 'property' | 'crm';
@@ -194,7 +194,6 @@ export const PORTFOLIO_DATA = {
         { title: "Responsive Experience", description: "Optimized UI across desktop, tablet, and mobile browsers." },
       ],
       tags: ["React", "TypeScript", "Redux", "Tailwind CSS", "JWT Authentication", "REST APIs"],
-      liveUrl: "https://example.com/precision-heart",
       image: "/images/precision-heart.png",
       imageType: "dashboard",
       featured: true,
@@ -218,7 +217,6 @@ export const PORTFOLIO_DATA = {
         { title: "Customer-friendly service workflow" },
       ],
       tags: ["React Native", "JavaScript", "Redux", "Firebase"],
-      liveUrl: "https://example.com/booknfix",
       image: "/images/book_fix.webp",
       imageType: "mobile",
       featured: true,
@@ -239,7 +237,6 @@ export const PORTFOLIO_DATA = {
         { title: "High-Performance Patient Search", description: "Scalable data grids capable of searching thousands of patient records instantly." },
       ],
       tags: ["OpenMRS", "JavaScript", "JSP", "Highcharts", "DICOM MedDream", "REST APIs"],
-      liveUrl: "https://example.com/rhms",
       image: "/images/RHMS.png",
       imageType: "dashboard",
       featured: false,
@@ -260,7 +257,6 @@ export const PORTFOLIO_DATA = {
         { title: "Instant Notifications", description: "Alerts for queue position changes and urgent patient status updates." },
       ],
       tags: ["React", "Material UI", "WebSockets", "REST APIs", "JavaScript", "Testing"],
-      liveUrl: "https://example.com/waiting-list",
       image: "/images/Waitinglist.png",
       imageType: "dashboard",
       featured: false,

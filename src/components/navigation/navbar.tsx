@@ -114,15 +114,6 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <a
-                href="/Sreejith_S.pdf"
-                download="Sreejith_S_Resume.pdf"
-                onClick={() => setMobileMenuOpen(false)}
-                className="mt-2 w-full text-center bg-white text-black font-bold text-sm py-3 rounded-full flex items-center justify-center gap-2"
-              >
-                <span>Download Resume</span>
-                <Download className="w-4 h-4" />
-              </a>
             </div>
           </motion.div>
         )}

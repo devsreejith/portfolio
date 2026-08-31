@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Copy, Github, Globe, Linkedin, Mail } from "lucide-react";
+import { Check, Copy, Globe, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 import { PORTFOLIO_DATA } from "@/data/portfolio-data";
 
@@ -18,19 +18,19 @@ export default function ContactSection() {
     <section id="contact" className="py-24 bg-[#050505] relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Heading & Action Buttons */}
-          <div className="lg:col-span-7 space-y-8">
+          {/* Left Column: Heading & Action Buttons - Centered on mobile */}
+          <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
             <div className="space-y-4">
               <h2 className="text-4xl sm:text-5xl font-display font-semibold text-white leading-tight tracking-tight">
                 Let's create something amazing together
               </h2>
-              <p className="text-sm sm:text-base text-gray-400 max-w-lg leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-gray-400 max-w-lg mx-auto lg:mx-0 leading-relaxed font-normal">
                 Ready to bring your vision to life? I'd love to hear about your project and explore how we can work together.
               </p>
             </div>
 
             {/* Action Button: Email Only */}
-            <div className="flex flex-wrap items-center gap-3.5">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
               <button
                 onClick={handleCopyEmail}
                 className="inline-flex items-center gap-2.5 bg-white text-black font-semibold text-xs sm:text-sm px-6 py-3.5 rounded-full hover:bg-gray-100 transition-all duration-200 shadow-xl hover:scale-105"
@@ -41,8 +41,8 @@ export default function ContactSection() {
               </button>
             </div>
 
-            {/* Social Icons Row (Globe, LinkedIn, GitHub) */}
-            <div className="flex items-center gap-3 pt-2">
+            {/* Social Icons Row (Globe, LinkedIn - GitHub removed) */}
+            <div className="flex items-center justify-center lg:justify-start gap-3 pt-2">
               <a
                 href="https://www.sreejiths.in"
                 target="_blank"
@@ -60,15 +60,6 @@ export default function ContactSection() {
                 title="LinkedIn Profile"
               >
                 <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href="https://github.com/devsreejith"
-                target="_blank"
-                rel="noreferrer"
-                className="w-10 h-10 rounded-full bg-[#14141a] border border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:border-[#00E599]/50 transition-all"
-                title="GitHub Profile"
-              >
-                <Github className="w-4 h-4" />
               </a>
             </div>
           </div>
