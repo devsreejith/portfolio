@@ -2,7 +2,27 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Check, Eye, Grid, X } from "lucide-react";
+import {
+  Activity,
+  ArrowUpRight,
+  Atom,
+  BarChart,
+  Check,
+  Code,
+  CreditCard,
+  Database,
+  Eye,
+  Flame,
+  Globe,
+  Grid,
+  Layers,
+  Palette,
+  Server,
+  Shield,
+  Smartphone,
+  X,
+  Zap,
+} from "lucide-react";
 import { PORTFOLIO_DATA, Project } from "@/data/portfolio-data";
 import EcommerceMockup from "@/components/ui/mockups/ecommerce-mockup";
 import DicomMockup from "@/components/ui/mockups/dicom-mockup";
@@ -11,20 +31,79 @@ import DashboardMockup from "@/components/ui/mockups/dashboard-mockup";
 import PropertyMockup from "@/components/ui/mockups/property-mockup";
 import CrmMockup from "@/components/ui/mockups/crm-mockup";
 
+const getTechInfo = (tag: string) => {
+  const normalized = tag.toLowerCase().trim();
+  if (normalized.includes("react native")) {
+    return { name: tag, role: "Mobile Framework", icon: Smartphone, color: "#61DAFB" };
+  }
+  if (normalized.includes("react") || normalized.includes("react.js")) {
+    return { name: tag, role: "Frontend Library", icon: Atom, color: "#61DAFB" };
+  }
+  if (normalized.includes("next.js") || normalized.includes("next")) {
+    return { name: tag, role: "Fullstack Framework", icon: Zap, color: "#FFFFFF" };
+  }
+  if (normalized.includes("node") || normalized.includes("node.js")) {
+    return { name: tag, role: "Backend Runtime", icon: Server, color: "#68A063" };
+  }
+  if (normalized.includes("postgres") || normalized.includes("postgresql")) {
+    return { name: tag, role: "Database", icon: Database, color: "#336791" };
+  }
+  if (normalized.includes("mongo") || normalized.includes("mongodb")) {
+    return { name: tag, role: "NoSQL Database", icon: Database, color: "#47A248" };
+  }
+  if (normalized.includes("n-genius") || normalized.includes("gateway") || normalized.includes("stripe")) {
+    return { name: tag, role: "Payment Gateway", icon: CreditCard, color: "#00E599" };
+  }
+  if (normalized.includes("tailwind")) {
+    return { name: tag, role: "CSS Framework", icon: Palette, color: "#38BDF8" };
+  }
+  if (normalized.includes("material ui") || normalized.includes("mui")) {
+    return { name: tag, role: "UI Component Library", icon: Palette, color: "#0081CB" };
+  }
+  if (normalized.includes("redux")) {
+    return { name: tag, role: "State Management", icon: Layers, color: "#764ABC" };
+  }
+  if (normalized.includes("firebase")) {
+    return { name: tag, role: "Backend Service", icon: Flame, color: "#FFCA28" };
+  }
+  if (normalized.includes("websocket") || normalized.includes("websockets")) {
+    return { name: tag, role: "Real-time Protocol", icon: Zap, color: "#00E599" };
+  }
+  if (normalized.includes("ohif") || normalized.includes("dicom") || normalized.includes("meddream") || normalized.includes("cornerstone")) {
+    return { name: tag, role: "Medical Imaging Tech", icon: Activity, color: "#00E599" };
+  }
+  if (normalized.includes("openmrs")) {
+    return { name: tag, role: "Enterprise EHR Platform", icon: Shield, color: "#00E599" };
+  }
+  if (normalized.includes("highcharts")) {
+    return { name: tag, role: "Analytics Visualization", icon: BarChart, color: "#38BDF8" };
+  }
+  if (normalized.includes("jwt") || normalized.includes("auth")) {
+    return { name: tag, role: "Security & Authentication", icon: Shield, color: "#00E599" };
+  }
+  if (normalized.includes("rest") || normalized.includes("api") || normalized.includes("web api")) {
+    return { name: tag, role: "API Architecture", icon: Globe, color: "#00E599" };
+  }
+  return { name: tag, role: "Technology Stack", icon: Code, color: "#00E599" };
+};
+
 export default function ProjectsSection() {
   const projects = PORTFOLIO_DATA.projects;
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [showAllModal, setShowAllModal] = useState(false);
 
-  // Lock background body scroll when any modal is open
+  // Lock background body and html scroll when any modal is open
   useEffect(() => {
     if (selectedProject || showAllModal) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, [selectedProject, showAllModal]);
 
@@ -172,7 +251,7 @@ export default function ProjectsSection() {
               </div>
 
               {/* Scrollable Content Container */}
-              <div className="p-6 overflow-y-auto flex-1 custom-scrollbar">
+              <div data-lenis-prevent="true" className="p-6 overflow-y-auto flex-1 custom-scrollbar overscroll-contain">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {projects.map((project) => (
                     <div
@@ -224,14 +303,14 @@ export default function ProjectsSection() {
       {/* Interactive Single Project Detail Modal Popup */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-hidden">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-hidden">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-md"
+              className="fixed inset-0 bg-black/85 backdrop-blur-md"
             />
 
             {/* Modal Box with Fixed Sticky Top Bar */}
@@ -240,16 +319,13 @@ export default function ProjectsSection() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="relative z-10 bg-[#111116] border border-white/15 rounded-3xl max-w-3xl w-full shadow-2xl max-h-[88vh] flex flex-col overflow-hidden my-6"
+              className="relative z-10 bg-[#111116] border border-white/15 rounded-3xl max-w-5xl lg:max-w-6xl w-full shadow-2xl max-h-[90vh] flex flex-col overflow-hidden my-4 sm:my-6"
             >
-              {/* Sticky Top Header Bar (Fixed Close X Button) */}
+              {/* Sticky Top Header Bar (Fixed Close X Button, No Breadcrumb) */}
               <div className="p-4 sm:p-5 border-b border-white/10 bg-[#111116]/95 backdrop-blur-md flex items-center justify-between shrink-0 z-30">
                 <div className="flex items-center gap-2">
-                  <span className="bg-[#00E599]/15 border border-[#00E599]/30 text-[#00E599] text-xs font-mono font-semibold px-3 py-1 rounded-full">
-                    {selectedProject.category}
-                  </span>
-                  <h3 className="text-base sm:text-lg font-display font-semibold text-white truncate max-w-[320px] sm:max-w-md">
-                    {selectedProject.title}
+                  <h3 className="text-xl sm:text-2xl font-display font-bold text-white tracking-tight">
+                    <span className="text-[#00E599]">Project</span> Detail
                   </h3>
                 </div>
 
@@ -262,98 +338,141 @@ export default function ProjectsSection() {
                 </button>
               </div>
 
-              {/* Scrollable Inside Modal Content Only */}
-              <div className="p-6 sm:p-8 overflow-y-auto flex-1 space-y-6 custom-scrollbar">
-                {/* Banner Visual (object-contain so full image is visible) */}
-                <div className="h-60 sm:h-80 rounded-2xl overflow-hidden relative bg-[#08080c] border border-white/10 flex items-center justify-center p-3">
-                  {selectedProject.image ? (
-                    <img
-                      src={selectedProject.image}
-                      alt={selectedProject.title}
-                      className="w-full h-full object-contain object-center"
-                    />
-                  ) : (
-                    <div className="w-full h-full p-2">
-                      {renderMockupFallback(selectedProject.imageType)}
-                    </div>
-                  )}
-                </div>
-
-                {/* Overview Text */}
-                <div className="space-y-3">
-                  <h3 className="text-xl sm:text-2xl font-display font-semibold text-white tracking-tight">
-                    {selectedProject.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
-                    {selectedProject.detailedOverview || selectedProject.description}
-                  </p>
-                </div>
-
-                {/* Project Focus if present */}
-                {selectedProject.projectFocus && (
-                  <div className="p-3.5 bg-white/5 border border-white/10 rounded-xl space-y-1">
-                    <div className="text-[11px] font-mono uppercase text-[#00E599] font-bold">Project Focus</div>
-                    <div className="text-xs text-gray-300 font-medium leading-relaxed">
-                      {selectedProject.projectFocus}
-                    </div>
-                  </div>
-                )}
-
-                {/* Key Features & Contributions */}
-                {selectedProject.keyFeatures && selectedProject.keyFeatures.length > 0 && (
-                  <div className="space-y-4 pt-4 border-t border-white/10">
-                    <h4 className="text-base font-display font-semibold text-white tracking-tight">
-                      Key Features
-                    </h4>
-                    <div className="grid grid-cols-1 gap-2.5">
-                      {selectedProject.keyFeatures.map((feat, fIdx) => (
-                        <div key={fIdx} className="flex items-start gap-3 bg-white/5 border border-white/10 rounded-xl p-3">
-                          <Check className="w-4 h-4 text-[#00E599] shrink-0 mt-0.5" />
-                          <div className="text-xs sm:text-sm leading-relaxed text-gray-200">
-                            {feat.description ? (
-                              <>
-                                <strong className="text-white font-semibold">{feat.title}</strong> —{" "}
-                                <span className="text-gray-300 font-normal">{feat.description}</span>
-                              </>
-                            ) : (
-                              <span className="text-gray-200 font-normal">{feat.title}</span>
-                            )}
-                          </div>
+              {/* Scrollable Main Content Container */}
+              <div
+                data-lenis-prevent="true"
+                className="p-5 sm:p-7 md:p-8 overflow-y-auto flex-1 custom-scrollbar overscroll-contain"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                  {/* Left Column: Image -> Title -> Overview -> Key Features (lg:col-span-7 xl:col-span-8) */}
+                  <div className="lg:col-span-7 xl:col-span-8 space-y-6">
+                    {/* Top Showcase Image */}
+                    <div className="relative rounded-2xl md:rounded-3xl overflow-hidden w-full shadow-2xl border border-white/10 bg-[#08080c]">
+                      {selectedProject.image ? (
+                        <img
+                          src={selectedProject.image}
+                          alt={selectedProject.title}
+                          className="w-full h-auto object-contain block rounded-2xl md:rounded-3xl"
+                        />
+                      ) : (
+                        <div className="w-full h-[320px] p-2 flex items-center justify-center">
+                          {renderMockupFallback(selectedProject.imageType)}
                         </div>
-                      ))}
+                      )}
                     </div>
-                  </div>
-                )}
 
-                {/* Tech Stack Chips */}
-                <div className="space-y-2 pt-4 border-t border-white/10">
-                  <div className="text-xs font-mono text-gray-400">Technology</div>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.tags.map((tag, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="bg-white/5 border border-white/10 text-gray-200 text-xs font-mono px-3 py-1 rounded-md"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    {/* Project Title */}
+                    <h3 className="text-2xl sm:text-3xl font-display font-semibold text-white tracking-tight leading-tight">
+                      {selectedProject.title}
+                    </h3>
+
+                    {/* Project Overview */}
+                    <div className="space-y-3 pt-2 border-t border-white/10">
+                      <h4 className="text-lg sm:text-xl font-display font-semibold text-white tracking-tight">
+                        Project Overview
+                      </h4>
+                      <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
+                        {selectedProject.detailedOverview || selectedProject.description}
+                      </p>
+                    </div>
+
+                    {/* Project Focus if present */}
+                    {selectedProject.projectFocus && (
+                      <div className="p-4 bg-white/5 border border-white/10 rounded-2xl space-y-1">
+                        <div className="text-xs font-mono uppercase text-[#00E599] font-bold">Project Focus</div>
+                        <div className="text-xs sm:text-sm text-gray-300 font-medium leading-relaxed">
+                          {selectedProject.projectFocus}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Key Features Section with Dark Cards & Green Badges */}
+                    {selectedProject.keyFeatures && selectedProject.keyFeatures.length > 0 && (
+                      <div className="space-y-4 pt-2 border-t border-white/10">
+                        <h4 className="text-lg sm:text-xl font-display font-semibold text-white tracking-tight">
+                          Key Features
+                        </h4>
+                        <div className="space-y-3">
+                          {selectedProject.keyFeatures.map((feat, fIdx) => (
+                            <div
+                              key={fIdx}
+                              className="flex items-start gap-3.5 bg-[#16161e]/90 border border-white/10 rounded-2xl p-4 sm:p-4.5 hover:border-white/20 transition-colors"
+                            >
+                              <div className="w-7 h-7 rounded-full bg-[#00E599]/15 border border-[#00E599]/30 flex items-center justify-center text-[#00E599] shrink-0 mt-0.5 shadow-sm">
+                                <Check className="w-4 h-4" />
+                              </div>
+                              <div className="text-xs sm:text-sm leading-relaxed text-gray-200">
+                                {feat.description ? (
+                                  <div>
+                                    <h5 className="text-white font-semibold mb-0.5">{feat.title}</h5>
+                                    <p className="text-gray-300 text-xs font-normal leading-relaxed">{feat.description}</p>
+                                  </div>
+                                ) : (
+                                  <span className="text-gray-200 font-normal">{feat.title}</span>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Right Column: Technology Cards Sidebar (lg:col-span-5 xl:col-span-4) */}
+                  <div className="lg:col-span-5 xl:col-span-4 space-y-6 lg:sticky lg:top-0">
+                    {/* Technology Section Header */}
+                    <div className="space-y-1.5">
+                      <h4 className="text-lg sm:text-xl font-display font-semibold text-white tracking-tight">
+                        Technology
+                      </h4>
+                      <div className="w-8 h-0.5 bg-[#00E599] rounded-full" />
+                    </div>
+
+                    {/* Stacked Technology Cards */}
+                    <div className="space-y-3">
+                      {selectedProject.tags.map((tag, tIdx) => {
+                        const tech = getTechInfo(tag);
+                        const IconComp = tech.icon;
+                        return (
+                          <div
+                            key={tIdx}
+                            className="bg-[#14141c] border border-white/10 rounded-2xl p-4 flex items-center gap-4 hover:border-[#00E599]/40 transition-colors group shadow-md"
+                          >
+                            <div
+                              className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"
+                              style={{ color: tech.color }}
+                            >
+                              <IconComp className="w-5 h-5" />
+                            </div>
+                            <div className="overflow-hidden">
+                              <div className="text-sm font-semibold text-white truncate group-hover:text-[#00E599] transition-colors">
+                                {tech.name}
+                              </div>
+                              <div className="text-xs text-gray-400 truncate mt-0.5">
+                                {tech.role}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Action Button: Live Demo */}
+                    {selectedProject.liveUrl && (
+                      <div className="pt-2">
+                        <a
+                          href={selectedProject.liveUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="w-full inline-flex items-center justify-center gap-2 bg-white text-black font-semibold text-xs sm:text-sm py-3.5 rounded-full hover:bg-gray-100 transition-colors shadow-md"
+                        >
+                          <span>Live Demo</span>
+                          <ArrowUpRight className="w-4 h-4" />
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
-
-                {/* Action Button: Live Demo Only (Rendered conditionally) */}
-                {selectedProject.liveUrl && (
-                  <div className="pt-4 border-t border-white/10">
-                    <a
-                      href={selectedProject.liveUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="w-full inline-flex items-center justify-center gap-2 bg-white text-black font-semibold text-xs sm:text-sm py-3.5 rounded-full hover:bg-gray-100 transition-colors shadow-md"
-                    >
-                      <span>Live Demo</span>
-                      <ArrowUpRight className="w-4 h-4" />
-                    </a>
-                  </div>
-                )}
               </div>
             </motion.div>
           </div>
