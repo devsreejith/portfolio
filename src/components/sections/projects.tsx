@@ -149,7 +149,7 @@ export default function ProjectsSection() {
               onClick={() => setShowAllModal(true)}
               className="inline-flex items-center gap-1.5 bg-[#181820] hover:bg-[#22222c] border border-white/10 text-xs font-medium text-gray-300 hover:text-white px-4 py-1.5 rounded-full transition-all duration-200 shadow-md"
             >
-              <span>View more</span>
+              <span>View all</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
           </motion.div>
@@ -166,10 +166,10 @@ export default function ProjectsSection() {
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               whileHover={{ y: -6 }}
               onClick={() => setSelectedProject(project)}
-              className="bg-[#121217] border border-white/10 rounded-[24px] overflow-hidden p-3 group relative shadow-2xl hover:border-[#00E599]/40 transition-all duration-300 cursor-pointer"
+              className="bg-[#121217] border border-white/10 rounded-[28px] p-4 sm:p-5 group relative shadow-2xl hover:border-[#00E599]/40 transition-all duration-300 cursor-pointer flex flex-col justify-between"
             >
-              {/* Full Card Image Showcase Container (object-cover edge-to-edge) */}
-              <div className="w-full aspect-[3/2] rounded-[18px] overflow-hidden relative bg-[#08080c] flex items-center justify-center">
+              {/* Image Showcase Container with Top-Right Floating Arrow */}
+              <div className="w-full aspect-[3/2] rounded-[20px] overflow-hidden relative bg-[#08080c] flex items-center justify-center">
                 {project.image ? (
                   <img
                     src={project.image}
@@ -182,23 +182,27 @@ export default function ProjectsSection() {
                   </div>
                 )}
 
-                {/* Hover Overlay with View More Button */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                  <span className="inline-flex items-center gap-2 bg-[#00E599] text-black font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-2xl scale-95 group-hover:scale-100 transition-transform duration-300">
-                    <Eye className="w-4 h-4 text-black" />
-                    <span>View More</span>
-                    <ArrowUpRight className="w-4 h-4 text-black" />
-                  </span>
+                {/* Top-Right Floating Arrow Icon */}
+                <div className="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-gray-300 group-hover:text-[#00E599] group-hover:border-[#00E599]/40 group-hover:bg-black/60 transition-all duration-300 shadow-lg">
+                  <ArrowUpRight className="w-4 h-4" />
+                </div>
+              </div>
+
+              {/* Bottom Details Section Under Image */}
+              <div className="pt-4 px-1 flex items-end justify-between gap-4">
+                <div className="space-y-1 min-w-0 flex-1">
+                  <h3 className="text-base sm:text-lg font-display font-semibold text-white tracking-tight group-hover:text-[#00E599] transition-colors truncate">
+                    {project.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-400 font-normal truncate">
+                    {project.description}
+                  </p>
                 </div>
 
-                {/* Integrated Floating Bottom Glass Overlay Bar */}
-                <div className="absolute bottom-3 left-3 right-3 bg-[#181820]/90 backdrop-blur-xl border border-white/10 rounded-2xl px-5 py-3 flex items-center justify-between shadow-2xl group-hover:border-white/20 transition-colors">
-                  <div className="font-display font-semibold text-xs sm:text-sm text-white tracking-wide group-hover:text-[#00E599] transition-colors truncate max-w-[70%]">
-                    {project.title}
-                  </div>
-                  <div className="text-[10px] font-mono uppercase text-gray-400 font-medium tracking-wider shrink-0">
+                <div className="shrink-0 flex items-center gap-1.5">
+                  <span className="text-[10px] font-mono uppercase bg-white/5 border border-white/10 text-gray-300 px-3 py-1.5 rounded-lg tracking-wider font-medium">
                     {project.category}
-                  </div>
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -260,9 +264,9 @@ export default function ProjectsSection() {
                         setShowAllModal(false);
                         setSelectedProject(project);
                       }}
-                      className="bg-[#181820] border border-white/10 rounded-[20px] overflow-hidden p-3 group relative shadow-xl hover:border-[#00E599]/50 transition-all duration-300 cursor-pointer"
+                      className="bg-[#181820] border border-white/10 rounded-[24px] p-4 group relative shadow-xl hover:border-[#00E599]/50 transition-all duration-300 cursor-pointer flex flex-col justify-between"
                     >
-                      <div className="w-full aspect-[3/2] rounded-xl overflow-hidden relative bg-[#08080c] flex items-center justify-center">
+                      <div className="w-full aspect-[3/2] rounded-[16px] overflow-hidden relative bg-[#08080c] flex items-center justify-center">
                         {project.image ? (
                           <img
                             src={project.image}
@@ -275,21 +279,18 @@ export default function ProjectsSection() {
                           </div>
                         )}
 
-                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                          <span className="inline-flex items-center gap-2 bg-[#00E599] text-black font-bold text-xs px-4 py-2 rounded-full shadow-2xl">
-                            <Eye className="w-3.5 h-3.5 text-black" />
-                            <span>View More</span>
-                          </span>
+                        <div className="absolute top-3.5 right-3.5 w-7 h-7 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-gray-300 group-hover:text-[#00E599] group-hover:border-[#00E599]/40 group-hover:bg-black/60 transition-all duration-300 shadow-lg">
+                          <ArrowUpRight className="w-3.5 h-3.5" />
                         </div>
+                      </div>
 
-                        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between bg-black/70 backdrop-blur-md p-2 rounded-lg border border-white/10">
-                          <div className="font-display font-semibold text-xs text-white group-hover:text-[#00E599] transition-colors truncate max-w-[70%]">
-                            {project.title}
-                          </div>
-                          <span className="text-[10px] font-mono text-gray-400 uppercase">
-                            {project.category}
-                          </span>
+                      <div className="pt-3 px-1 flex items-center justify-between gap-3">
+                        <div className="font-display font-semibold text-sm text-white group-hover:text-[#00E599] transition-colors truncate">
+                          {project.title}
                         </div>
+                        <span className="text-[10px] font-mono text-gray-400 uppercase shrink-0 bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">
+                          {project.category}
+                        </span>
                       </div>
                     </div>
                   ))}
