@@ -15,7 +15,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#050505] relative overflow-hidden">
+    <section id="contact" className="py-12 sm:py-24 bg-[#050505] relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left Column: Heading & Action Buttons - Centered on mobile */}

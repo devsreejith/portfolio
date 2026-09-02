@@ -79,10 +79,10 @@ export const PORTFOLIO_DATA = {
   whatIDo: [
     {
       id: "web-dev",
-      title: "Full Stack Web Development",
+      title: "Web Application Development",
       description: "Building production-ready, ultra-fast web applications with modern architectures and clean maintainable code.",
       features: [
-        "React.js & Next.js 15 (App Router)",
+        "React.js & Next.js (App Router)",
         "TypeScript & Clean Architecture",
         "Tailwind CSS & Framer Motion UI",
         "Node.js APIs & Microservices",
@@ -101,7 +101,7 @@ export const PORTFOLIO_DATA = {
         "iOS & Android Deployment",
         "Push Notifications & Background Services",
         "OTP Authentication & Biometrics",
-        "Stripe & Native Payment Integration",
+        "Payment Integration",
         "Offline Sync & Real-time State",
       ],
       icon: "smartphone",
@@ -339,15 +339,15 @@ export const PORTFOLIO_DATA = {
       role: "Full Stack Developer",
       period: "2025 – Present",
       location: "UAE Remote",
-      description: "Developing scalable web & mobile applications, integrating payment gateways, and architecting cloud-ready microservices for UAE and international enterprise clients.",
-      skills: ["React", "Next.js 15", "Node.js", "React Native", "PostgreSQL"],
+      description: "Developing scalable web, mobile & e-commerce platforms, integrating payment gateways, and architecting cloud-ready microservices for UAE and international enterprise clients.",
+      skills: ["React", "Next.js", "Node.js", "React Native", "PostgreSQL"],
     },
     {
       company: "Cirakas Consulting",
       role: "Senior Web Developer",
       period: "2018 – 2025",
       location: "Kerala, India",
-      description: "Led full-stack engineering for major client projects including official e-commerce platforms, DICOM medical imaging tools, and responsive admin portals.",
+      description: "Led full-stack engineering for major client projects including DICOM medical imaging tools, radiology workflows, and responsive admin portals.",
       skills: ["React.js", "TypeScript", "Node.js", "Express", "MongoDB"],
     },
     {
@@ -373,7 +373,7 @@ export const PORTFOLIO_DATA = {
       title: "Design & Development",
       description: "Crafting pixel-perfect responsive layouts with Framer Motion, building modular React components, and integrating robust REST/GraphQL APIs.",
       icon: "Code2",
-      codeSnippet: "const Developer = {\n  stack: ['Next.js 15', 'TypeScript'],\n  style: 'Tailwind CSS + Glassmorphism',\n  cleanCode: true\n};",
+      codeSnippet: "const Developer = {\n  stack: ['Next.js', 'TypeScript'],\n  style: 'Tailwind CSS + Glassmorphism',\n  cleanCode: true\n};",
     },
     {
       step: "03",
@@ -387,7 +387,7 @@ export const PORTFOLIO_DATA = {
   services: [
     {
       title: "Website Development",
-      description: "Custom high-performance web applications built with Next.js 15, React 19, and Tailwind CSS.",
+      description: "Custom high-performance web applications built with Next.js, React 19, and Tailwind CSS.",
       icon: "Globe",
     },
     {
@@ -407,7 +407,7 @@ export const PORTFOLIO_DATA = {
     },
     {
       title: "E-Commerce Platforms",
-      description: "Custom online stores with Stripe, PayPal, order management, and inventory tracking.",
+      description: "Custom online stores with payment gateways, order management, and inventory tracking.",
       icon: "ShoppingBag",
     },
     {

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Play, User } from "lucide-react";
+import { ChevronDown, Play, User } from "lucide-react";
 import Link from "next/link";
 
 export default function HeroSection() {
@@ -89,7 +89,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Mouse Scroll Pill Positioned at Bottom 15% */}
+      {/* Scroll Indicator Positioned at Bottom 15% */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -97,7 +97,23 @@ export default function HeroSection() {
         className="absolute bottom-[15%] left-1/2 -translate-x-1/2 z-20"
       >
         <Link href="#what-i-do" aria-label="Scroll down">
-          <div className="w-6 h-10 rounded-full border-2 border-white/20 hover:border-[#00E599]/70 transition-colors flex justify-center p-1.5 backdrop-blur-md bg-white/5 shadow-lg">
+          {/* Mobile View: Minimal Down Angle Arrow */}
+          <div className="flex sm:hidden items-center justify-center w-9 h-9 rounded-full border border-white/20 hover:border-[#00E599]/70 bg-[#121217]/80 backdrop-blur-md shadow-lg transition-colors">
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "loop",
+                ease: "easeInOut",
+              }}
+            >
+              <ChevronDown className="w-5 h-5 text-[#00E599]" />
+            </motion.div>
+          </div>
+
+          {/* Desktop View: Mouse Scroll Pill */}
+          <div className="hidden sm:flex w-6 h-10 rounded-full border-2 border-white/20 hover:border-[#00E599]/70 transition-colors justify-center p-1.5 backdrop-blur-md bg-white/5 shadow-lg">
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{
