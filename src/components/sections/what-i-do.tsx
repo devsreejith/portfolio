@@ -54,7 +54,7 @@ export default function WhatIDoSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.15 }}
               whileHover={{ y: -6 }}
-              className="bg-[#121217] border border-white/10 rounded-[28px] p-7 flex flex-col justify-between shadow-2xl relative group hover:border-white/20 transition-all duration-300"
+              className="bg-[#121217]/90 backdrop-blur-xl border border-white/10 rounded-[28px] p-7 sm:p-8 flex flex-col justify-between shadow-2xl relative group hover:border-white/25 transition-all duration-300"
             >
               {/* Subtle Gradient Backlight */}
               <div

@@ -30,17 +30,18 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 sm:pt-6 px-4">
-      <motion.nav
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`w-full max-w-5xl transition-all duration-300 rounded-2xl flex items-center justify-between px-4 sm:px-6 border border-white/10 ${
-          scrolled
-            ? "py-3 bg-[#111116]/95 backdrop-blur-xl shadow-2xl shadow-black/90"
-            : "py-3.5 bg-[#121217]/80 backdrop-blur-md"
-        }`}
-      >
+    <header className="fixed top-0 left-0 right-0 z-50 pt-4 sm:pt-6 px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto w-full flex justify-center">
+        <motion.nav
+          initial={{ y: -30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className={`w-full transition-all duration-300 rounded-2xl flex items-center justify-between px-4 sm:px-6 border shadow-2xl ${
+            scrolled
+              ? "py-3 bg-[#111116]/90 backdrop-blur-2xl border-white/20 shadow-black/90"
+              : "py-3.5 bg-[#121217]/85 backdrop-blur-xl border-white/15"
+          }`}
+        >
         {/* Left: Brand Initial Box (SS) */}
         <Link href="#" className="flex items-center gap-2 group">
           <div className="w-10 h-10 rounded-xl bg-[#1c1c24] border border-white/15 flex items-center justify-center font-display font-bold text-white group-hover:border-white/40 transition-colors shadow-inner">
@@ -93,6 +94,7 @@ export default function Navbar() {
           </button>
         </div>
       </motion.nav>
+    </div>
 
       {/* Mobile Menu Drawer */}
       <AnimatePresence>

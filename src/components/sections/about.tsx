@@ -23,7 +23,7 @@ export default function AboutSection() {
               
               <div className="space-y-4 relative z-10">
                 <span className="text-xs font-mono text-[#00E599] uppercase tracking-wider font-semibold">
-                  About Engineer
+                  About
                 </span>
                 <h3 className="text-3xl sm:text-4xl font-display font-semibold text-white tracking-tight leading-tight">
                   Software Engineer & Solution Architect

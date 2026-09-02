@@ -1,37 +1,58 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Preloader() {
   const [loading, setLoading] = useState(true);
-  const [fade, setFade] = useState(false);
 
   useEffect(() => {
-    // Initiate fade-out after 1 second
     const timer = setTimeout(() => {
-      setFade(true);
-      setTimeout(() => setLoading(false), 400);
-    }, 1000);
+      setLoading(false);
+    }, 1100);
 
     return () => clearTimeout(timer);
   }, []);
 
-  if (!loading) return null;
-
   return (
-    <div
-      className={`fixed inset-0 z-[9999] bg-[#050505] flex items-center justify-center select-none transition-opacity duration-400 ${
-        fade ? "opacity-0 pointer-events-none" : "opacity-100"
-      }`}
-    >
-      {/* Centered Circular White Spinner Loader */}
-      <div className="relative w-12 h-12 flex items-center justify-center">
-        {/* Subtle Outer Track Ring */}
-        <div className="absolute inset-0 rounded-full border-2 border-white/10" />
-
-        {/* Pure Tailwind CSS Animated White Spinning Arc */}
-        <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-white border-r-white/80 animate-spin shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
-      </div>
-    </div>
+    <AnimatePresence>
+      {loading && (
+        <motion.div
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
+          className="fixed inset-0 z-[9999] bg-[#0B0B0F] flex items-center justify-center select-none"
+        >
+          {/* 20px Minimal Dark Loader with Rotating Crescent Light Arc */}
+          <div className="relative w-[20px] h-[20px] flex items-center justify-center">
+            <svg
+              className="w-[20px] h-[20px] animate-spin"
+              style={{ animationDuration: "0.65s", animationTimingFunction: "linear" }}
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <filter id="crescent-glow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="1" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              {/* Thin Glowing White Crescent Arc */}
+              <path
+                d="M 12 2 A 10 10 0 0 1 22 12"
+                stroke="white"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                filter="url(#crescent-glow)"
+              />
+            </svg>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

@@ -4,6 +4,7 @@ import "./globals.css";
 import LenisProvider from "@/components/providers/lenis-provider";
 import MouseGlow from "@/components/ui/mouse-glow";
 import ScrollProgress from "@/components/ui/scroll-progress";
+import ScrollToTop from "@/components/ui/scroll-to-top";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,6 +42,7 @@ export default function RootLayout({
         <LenisProvider>
           <ScrollProgress />
           <MouseGlow />
+          <ScrollToTop />
           {children}
         </LenisProvider>
       </body>

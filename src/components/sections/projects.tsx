@@ -149,7 +149,7 @@ export default function ProjectsSection() {
               onClick={() => setShowAllModal(true)}
               className="inline-flex items-center gap-1.5 bg-[#181820] hover:bg-[#22222c] border border-white/10 text-xs font-medium text-gray-300 hover:text-white px-4 py-1.5 rounded-full transition-all duration-200 shadow-md"
             >
-              <span>See all ({projects.length})</span>
+              <span>View more</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
           </motion.div>
@@ -235,7 +235,7 @@ export default function ProjectsSection() {
                   </div>
                   <div>
                     <h3 className="text-xl sm:text-2xl font-display font-semibold text-white tracking-tight">
-                      All Projects ({projects.length})
+                      All Projects
                     </h3>
                     <p className="text-xs text-gray-400">Click any project to view full architecture details</p>
                   </div>
