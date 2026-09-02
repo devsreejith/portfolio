@@ -41,13 +41,10 @@ export default function SkillsSection() {
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               className="bg-[#121217] border border-white/10 rounded-[28px] p-6 shadow-2xl space-y-5 group hover:border-white/20 transition-all duration-300"
             >
-              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="border-b border-white/10 pb-3">
                 <h3 className="text-base font-display font-semibold text-white tracking-tight">
                   {cat.title}
                 </h3>
-                <span className="text-[10px] font-mono text-gray-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded">
-                  {cat.skills.length} Stack
-                </span>
               </div>
 
               <div className="flex flex-wrap gap-2">

@@ -168,13 +168,13 @@ export default function ProjectsSection() {
               onClick={() => setSelectedProject(project)}
               className="bg-[#121217] border border-white/10 rounded-[24px] overflow-hidden p-3 group relative shadow-2xl hover:border-[#00E599]/40 transition-all duration-300 cursor-pointer"
             >
-              {/* Full Card Image Showcase Container (object-contain so full image is visible) */}
-              <div className="h-[270px] sm:h-[320px] rounded-[18px] overflow-hidden relative bg-[#08080c] flex items-center justify-center p-2">
+              {/* Full Card Image Showcase Container (object-cover edge-to-edge) */}
+              <div className="w-full aspect-[3/2] rounded-[18px] overflow-hidden relative bg-[#08080c] flex items-center justify-center">
                 {project.image ? (
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-contain object-center group-hover:scale-[1.03] transition-transform duration-500"
+                    className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
                   />
                 ) : (
                   <div className="w-full h-full p-2">
@@ -262,12 +262,12 @@ export default function ProjectsSection() {
                       }}
                       className="bg-[#181820] border border-white/10 rounded-[20px] overflow-hidden p-3 group relative shadow-xl hover:border-[#00E599]/50 transition-all duration-300 cursor-pointer"
                     >
-                      <div className="h-[220px] rounded-xl overflow-hidden relative bg-[#08080c] flex items-center justify-center p-2">
+                      <div className="w-full aspect-[3/2] rounded-xl overflow-hidden relative bg-[#08080c] flex items-center justify-center">
                         {project.image ? (
                           <img
                             src={project.image}
                             alt={project.title}
-                            className="w-full h-full object-contain object-center group-hover:scale-[1.03] transition-transform duration-500"
+                            className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
                           />
                         ) : (
                           <div className="w-full h-full p-2">

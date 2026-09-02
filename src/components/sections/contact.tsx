@@ -70,12 +70,15 @@ export default function ContactSection() {
               Quick Links
             </h3>
             
-            <div className="flex flex-col gap-3 text-sm text-gray-300 font-normal">
-              <Link href="#work" className="hover:text-[#00E599] transition-colors">Work</Link>
-              <Link href="#about" className="hover:text-[#00E599] transition-colors">About</Link>
-              <Link href="#process" className="hover:text-[#00E599] transition-colors">Process</Link>
-              <Link href="#projects" className="hover:text-[#00E599] transition-colors">Projects</Link>
-              <Link href="#contact" className="hover:text-[#00E599] transition-colors">Contact</Link>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-3.5 text-sm text-gray-300 font-normal">
+              <div className="flex flex-col gap-3">
+                <Link href="#work" className="hover:text-[#00E599] transition-colors">Work</Link>
+                <Link href="#about" className="hover:text-[#00E599] transition-colors">About</Link>
+              </div>
+              <div className="flex flex-col gap-3">
+                <Link href="#process" className="hover:text-[#00E599] transition-colors">Process</Link>
+                <Link href="#projects" className="hover:text-[#00E599] transition-colors">Projects</Link>
+              </div>
             </div>
           </div>
         </div>
