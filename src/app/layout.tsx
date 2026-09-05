@@ -45,6 +45,13 @@ export default function RootLayout({
           <ScrollToTop />
           {children}
         </LenisProvider>
+
+        {/* Cloudflare Web Analytics */}
+        <script
+          type="module"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "d53d6767d5a343aca0952fbb8912ad66"}'
+        />
       </body>
     </html>
   );
