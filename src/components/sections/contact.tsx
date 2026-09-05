@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Check, Copy, Globe, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 import { PORTFOLIO_DATA } from "@/data/portfolio-data";
+import { trackEvent } from "@/lib/analytics";
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -11,6 +12,10 @@ export default function ContactSection() {
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PORTFOLIO_DATA.personal.email);
     setCopied(true);
+    trackEvent("email_click", {
+      email: PORTFOLIO_DATA.personal.email,
+      page_url: typeof window !== "undefined" ? window.location.href : "",
+    });
     setTimeout(() => setCopied(false), 2500);
   };
 
@@ -41,7 +46,7 @@ export default function ContactSection() {
               </button>
             </div>
 
-            {/* Social Icons Row (Globe, LinkedIn - GitHub removed) */}
+            {/* Social Icons Row (Globe, LinkedIn) */}
             <div className="flex items-center justify-center lg:justify-start gap-3 pt-2">
               <a
                 href="https://www.sreejiths.in"
@@ -56,6 +61,12 @@ export default function ContactSection() {
                 href="https://www.linkedin.com/in/sreejith-s2103"
                 target="_blank"
                 rel="noreferrer"
+                onClick={() =>
+                  trackEvent("linkedin_click", {
+                    url: "https://www.linkedin.com/in/sreejith-s2103",
+                    page_url: typeof window !== "undefined" ? window.location.href : "",
+                  })
+                }
                 className="w-10 h-10 rounded-full bg-[#14141a] border border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:border-[#00E599]/50 transition-all"
                 title="LinkedIn Profile"
               >

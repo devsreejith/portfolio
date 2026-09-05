@@ -5,6 +5,7 @@ import LenisProvider from "@/components/providers/lenis-provider";
 import MouseGlow from "@/components/ui/mouse-glow";
 import ScrollProgress from "@/components/ui/scroll-progress";
 import ScrollToTop from "@/components/ui/scroll-to-top";
+import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -38,6 +39,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        {/* Google tag (gtag.js) */}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${GA_MEASUREMENT_ID}', {
+                send_page_view: true
+              });
+            `,
+          }}
+        />
+      </head>
       <body className={`${inter.variable} ${plusJakartaSans.variable} bg-[#050505] text-white antialiased selection:bg-[#00E599] selection:text-black`}>
         <LenisProvider>
           <ScrollProgress />

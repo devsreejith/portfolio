@@ -24,6 +24,7 @@ import {
   Zap,
 } from "lucide-react";
 import { PORTFOLIO_DATA, Project } from "@/data/portfolio-data";
+import { trackEvent } from "@/lib/analytics";
 import EcommerceMockup from "@/components/ui/mockups/ecommerce-mockup";
 import DicomMockup from "@/components/ui/mockups/dicom-mockup";
 import MobileMockup from "@/components/ui/mockups/mobile-mockup";
@@ -107,6 +108,16 @@ export default function ProjectsSection() {
     };
   }, [selectedProject, showAllModal]);
 
+  const handleOpenProject = (project: Project) => {
+    setSelectedProject(project);
+    trackEvent("project_view", {
+      project_name: project.title,
+      project_id: project.id,
+      category: project.category,
+      page_url: typeof window !== "undefined" ? window.location.href : "",
+    });
+  };
+
   const renderMockupFallback = (type: string) => {
     switch (type) {
       case "ecommerce":
@@ -165,7 +176,7 @@ export default function ProjectsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               whileHover={{ y: -6 }}
-              onClick={() => setSelectedProject(project)}
+              onClick={() => handleOpenProject(project)}
               className="bg-[#121217] border border-white/10 rounded-[28px] p-4 sm:p-5 group relative shadow-2xl hover:border-[#00E599]/40 transition-all duration-300 cursor-pointer flex flex-col justify-between"
             >
               {/* Image Showcase Container with Top-Right Floating Arrow */}
@@ -262,7 +273,7 @@ export default function ProjectsSection() {
                       key={project.id}
                       onClick={() => {
                         setShowAllModal(false);
-                        setSelectedProject(project);
+                        handleOpenProject(project);
                       }}
                       className="bg-[#181820] border border-white/10 rounded-[24px] p-4 group relative shadow-xl hover:border-[#00E599]/50 transition-all duration-300 cursor-pointer flex flex-col justify-between"
                     >

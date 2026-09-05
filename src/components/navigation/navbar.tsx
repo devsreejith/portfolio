@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, Menu, X } from "lucide-react";
 import Link from "next/link";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -67,6 +68,12 @@ export default function Navbar() {
           <a
             href="/Sreejith_S.pdf"
             download="Sreejith_S_Resume.pdf"
+            onClick={() =>
+              trackEvent("resume_download", {
+                file_name: "Sreejith_S_Resume.pdf",
+                page_url: typeof window !== "undefined" ? window.location.href : "",
+              })
+            }
             className="group relative inline-flex items-center gap-2 bg-white text-black font-semibold text-xs px-5 py-2.5 rounded-full hover:bg-gray-100 transition-all duration-200 shadow-md hover:scale-[1.02]"
           >
             <span>Download Resume</span>
@@ -79,6 +86,12 @@ export default function Navbar() {
           <a
             href="/Sreejith_S.pdf"
             download="Sreejith_S_Resume.pdf"
+            onClick={() =>
+              trackEvent("resume_download", {
+                file_name: "Sreejith_S_Resume.pdf",
+                page_url: typeof window !== "undefined" ? window.location.href : "",
+              })
+            }
             className="inline-flex items-center gap-1.5 bg-white text-black font-semibold text-xs px-3.5 py-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
           >
             <span>Resume</span>
